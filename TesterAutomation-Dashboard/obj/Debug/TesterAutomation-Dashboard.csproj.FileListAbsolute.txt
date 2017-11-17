@@ -1,0 +1,11 @@
+C:\Users\Lin\Desktop\Project\TesterAutomation-Dashboard\TesterAutomation-Dashboard\bin\Debug\TesterAutomation-Dashboard.exe
+C:\Users\Lin\Desktop\Project\TesterAutomation-Dashboard\TesterAutomation-Dashboard\bin\Debug\TesterAutomation-Dashboard.pdb
+C:\Users\Lin\Desktop\Project\TesterAutomation-Dashboard\TesterAutomation-Dashboard\obj\Debug\TesterAutomation-Dashboard.csprojResolveAssemblyReference.cache
+C:\Users\Lin\Desktop\Project\TesterAutomation-Dashboard\TesterAutomation-Dashboard\obj\Debug\TesterAutomation_Dashboard.Form1.resources
+C:\Users\Lin\Desktop\Project\TesterAutomation-Dashboard\TesterAutomation-Dashboard\obj\Debug\TesterAutomation_Dashboard.Properties.Resources.resources
+C:\Users\Lin\Desktop\Project\TesterAutomation-Dashboard\TesterAutomation-Dashboard\obj\Debug\TesterAutomation-Dashboard.csproj.GenerateResource.Cache
+C:\Users\Lin\Desktop\Project\TesterAutomation-Dashboard\TesterAutomation-Dashboard\obj\Debug\TesterAutomation-Dashboard.csproj.CoreCompileInputs.cache
+C:\Users\Lin\Desktop\Project\TesterAutomation-Dashboard\TesterAutomation-Dashboard\obj\Debug\TesterAutomation-Dashboard.exe
+C:\Users\Lin\Desktop\Project\TesterAutomation-Dashboard\TesterAutomation-Dashboard\obj\Debug\TesterAutomation-Dashboard.pdb
+C:\Users\Lin\Desktop\Project\TesterAutomation-Dashboard\TesterAutomation-Dashboard\bin\Debug\Ivi.Visa.dll
+C:\Users\Lin\Desktop\Project\TesterAutomation-Dashboard\TesterAutomation-Dashboard\bin\Debug\Ivi.Visa.xml
