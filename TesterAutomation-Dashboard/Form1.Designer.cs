@@ -42,7 +42,23 @@
             this.labelConn_Value = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.rbSeries = new System.Windows.Forms.RadioButton();
+            this.rbParallel = new System.Windows.Forms.RadioButton();
+            this.txtAveRate = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.rbInterLong = new System.Windows.Forms.RadioButton();
+            this.rbInterMedium = new System.Windows.Forms.RadioButton();
+            this.rbInterShort = new System.Windows.Forms.RadioButton();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.txtOscVoltage = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.txtMeasVoltage = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.labelS2_Value = new System.Windows.Forms.Label();
             this.labelS2_Unit = new System.Windows.Forms.Label();
             this.labelS2 = new System.Windows.Forms.Label();
@@ -65,40 +81,28 @@
             this.labelFreq = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.txtCfOscVoltage = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.txtCfMeasVoltage = new System.Windows.Forms.TextBox();
-            this.txtAveRate = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.rbInterLong = new System.Windows.Forms.RadioButton();
-            this.rbInterMedium = new System.Windows.Forms.RadioButton();
-            this.rbInterShort = new System.Windows.Forms.RadioButton();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.rbSeries = new System.Windows.Forms.RadioButton();
-            this.rbParallel = new System.Windows.Forms.RadioButton();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.button5 = new System.Windows.Forms.Button();
             this.labelVersion = new System.Windows.Forms.Label();
+            this.buttonSubmit = new System.Windows.Forms.Button();
+            this.txtFrequency = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBoxStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureConn)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -158,7 +162,7 @@
             this.groupBoxStatus.Controls.Add(this.label1);
             this.groupBoxStatus.Location = new System.Drawing.Point(12, 36);
             this.groupBoxStatus.Name = "groupBoxStatus";
-            this.groupBoxStatus.Size = new System.Drawing.Size(166, 136);
+            this.groupBoxStatus.Size = new System.Drawing.Size(166, 117);
             this.groupBoxStatus.TabIndex = 3;
             this.groupBoxStatus.TabStop = false;
             this.groupBoxStatus.Text = "Status";
@@ -207,22 +211,176 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.txtFrequency);
+            this.groupBox1.Controls.Add(this.buttonSubmit);
             this.groupBox1.Controls.Add(this.groupBox5);
             this.groupBox1.Controls.Add(this.txtAveRate);
             this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Controls.Add(this.label24);
             this.groupBox1.Controls.Add(this.label25);
-            this.groupBox1.Controls.Add(this.txtCfOscVoltage);
+            this.groupBox1.Controls.Add(this.txtOscVoltage);
             this.groupBox1.Controls.Add(this.label32);
             this.groupBox1.Controls.Add(this.label33);
-            this.groupBox1.Controls.Add(this.txtCfMeasVoltage);
-            this.groupBox1.Location = new System.Drawing.Point(12, 178);
+            this.groupBox1.Controls.Add(this.txtMeasVoltage);
+            this.groupBox1.Location = new System.Drawing.Point(12, 159);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(166, 328);
+            this.groupBox1.Size = new System.Drawing.Size(166, 372);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Control Panel";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.rbSeries);
+            this.groupBox5.Controls.Add(this.rbParallel);
+            this.groupBox5.Location = new System.Drawing.Point(9, 270);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(117, 61);
+            this.groupBox5.TabIndex = 27;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Equivalent Circuit";
+            // 
+            // rbSeries
+            // 
+            this.rbSeries.AutoSize = true;
+            this.rbSeries.Location = new System.Drawing.Point(6, 42);
+            this.rbSeries.Name = "rbSeries";
+            this.rbSeries.Size = new System.Drawing.Size(54, 17);
+            this.rbSeries.TabIndex = 2;
+            this.rbSeries.TabStop = true;
+            this.rbSeries.Text = "Series";
+            this.rbSeries.UseVisualStyleBackColor = true;
+            // 
+            // rbParallel
+            // 
+            this.rbParallel.AutoSize = true;
+            this.rbParallel.Checked = true;
+            this.rbParallel.Location = new System.Drawing.Point(6, 19);
+            this.rbParallel.Name = "rbParallel";
+            this.rbParallel.Size = new System.Drawing.Size(59, 17);
+            this.rbParallel.TabIndex = 1;
+            this.rbParallel.TabStop = true;
+            this.rbParallel.Text = "Parallel";
+            this.rbParallel.UseVisualStyleBackColor = true;
+            // 
+            // txtAveRate
+            // 
+            this.txtAveRate.Location = new System.Drawing.Point(10, 247);
+            this.txtAveRate.Name = "txtAveRate";
+            this.txtAveRate.Size = new System.Drawing.Size(81, 20);
+            this.txtAveRate.TabIndex = 26;
+            this.txtAveRate.Text = "4";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(9, 231);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(81, 13);
+            this.label17.TabIndex = 25;
+            this.label17.Text = "Averaging Rate";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.rbInterLong);
+            this.groupBox4.Controls.Add(this.rbInterMedium);
+            this.groupBox4.Controls.Add(this.rbInterShort);
+            this.groupBox4.Location = new System.Drawing.Point(10, 138);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(131, 90);
+            this.groupBox4.TabIndex = 24;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Intergration Time";
+            // 
+            // rbInterLong
+            // 
+            this.rbInterLong.AutoSize = true;
+            this.rbInterLong.Location = new System.Drawing.Point(6, 67);
+            this.rbInterLong.Name = "rbInterLong";
+            this.rbInterLong.Size = new System.Drawing.Size(55, 17);
+            this.rbInterLong.TabIndex = 2;
+            this.rbInterLong.Text = "LONG";
+            this.rbInterLong.UseVisualStyleBackColor = true;
+            this.rbInterLong.CheckedChanged += new System.EventHandler(this.rbInterLong_CheckedChanged);
+            // 
+            // rbInterMedium
+            // 
+            this.rbInterMedium.AutoSize = true;
+            this.rbInterMedium.Checked = true;
+            this.rbInterMedium.Location = new System.Drawing.Point(6, 44);
+            this.rbInterMedium.Name = "rbInterMedium";
+            this.rbInterMedium.Size = new System.Drawing.Size(69, 17);
+            this.rbInterMedium.TabIndex = 1;
+            this.rbInterMedium.TabStop = true;
+            this.rbInterMedium.Text = "MEDIUM";
+            this.rbInterMedium.UseVisualStyleBackColor = true;
+            this.rbInterMedium.CheckedChanged += new System.EventHandler(this.rbInterMedium_CheckedChanged);
+            // 
+            // rbInterShort
+            // 
+            this.rbInterShort.AutoSize = true;
+            this.rbInterShort.Location = new System.Drawing.Point(6, 22);
+            this.rbInterShort.Name = "rbInterShort";
+            this.rbInterShort.Size = new System.Drawing.Size(63, 17);
+            this.rbInterShort.TabIndex = 0;
+            this.rbInterShort.Text = "SHORT";
+            this.rbInterShort.UseVisualStyleBackColor = true;
+            this.rbInterShort.CheckedChanged += new System.EventHandler(this.rbInterShort_CheckedChanged);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(96, 116);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(22, 13);
+            this.label24.TabIndex = 23;
+            this.label24.Text = "mV";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(96, 73);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(14, 13);
+            this.label25.TabIndex = 22;
+            this.label25.Text = "V";
+            // 
+            // txtOscVoltage
+            // 
+            this.txtOscVoltage.Location = new System.Drawing.Point(9, 112);
+            this.txtOscVoltage.Name = "txtOscVoltage";
+            this.txtOscVoltage.Size = new System.Drawing.Size(81, 20);
+            this.txtOscVoltage.TabIndex = 21;
+            this.txtOscVoltage.Text = "25";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(7, 96);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(94, 13);
+            this.label32.TabIndex = 20;
+            this.label32.Text = "Oscillation Voltage";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(7, 54);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(110, 13);
+            this.label33.TabIndex = 19;
+            this.label33.Text = "Measurement Voltage";
+            // 
+            // txtMeasVoltage
+            // 
+            this.txtMeasVoltage.Location = new System.Drawing.Point(9, 70);
+            this.txtMeasVoltage.Name = "txtMeasVoltage";
+            this.txtMeasVoltage.Size = new System.Drawing.Size(81, 20);
+            this.txtMeasVoltage.TabIndex = 18;
+            this.txtMeasVoltage.Text = "0";
             // 
             // groupBox2
             // 
@@ -253,6 +411,15 @@
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Dashboard";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(597, 215);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(68, 23);
+            this.button5.TabIndex = 20;
+            this.button5.Text = "Pause";
+            this.button5.UseVisualStyleBackColor = true;
             // 
             // labelS2_Value
             // 
@@ -457,9 +624,9 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(385, 350);
+            this.dataGridView1.Location = new System.Drawing.Point(430, 350);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(390, 152);
+            this.dataGridView1.Size = new System.Drawing.Size(345, 188);
             this.dataGridView1.TabIndex = 6;
             // 
             // groupBox3
@@ -474,6 +641,42 @@
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Parameter";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(257, 19);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(176, 19);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(95, 19);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(10, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // buttonAdd
             // 
@@ -495,198 +698,12 @@
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(781, 479);
+            this.buttonClear.Location = new System.Drawing.Point(781, 515);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 23);
             this.buttonClear.TabIndex = 10;
             this.buttonClear.Text = "Clear";
             this.buttonClear.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(10, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(95, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(176, 19);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(257, 19);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(95, 80);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(22, 13);
-            this.label24.TabIndex = 23;
-            this.label24.Text = "mV";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(95, 37);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(14, 13);
-            this.label25.TabIndex = 22;
-            this.label25.Text = "V";
-            // 
-            // txtCfOscVoltage
-            // 
-            this.txtCfOscVoltage.Location = new System.Drawing.Point(8, 76);
-            this.txtCfOscVoltage.Name = "txtCfOscVoltage";
-            this.txtCfOscVoltage.Size = new System.Drawing.Size(81, 20);
-            this.txtCfOscVoltage.TabIndex = 21;
-            this.txtCfOscVoltage.Text = "25";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(6, 60);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(94, 13);
-            this.label32.TabIndex = 20;
-            this.label32.Text = "Oscillation Voltage";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(6, 18);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(110, 13);
-            this.label33.TabIndex = 19;
-            this.label33.Text = "Measurement Voltage";
-            // 
-            // txtCfMeasVoltage
-            // 
-            this.txtCfMeasVoltage.Location = new System.Drawing.Point(8, 34);
-            this.txtCfMeasVoltage.Name = "txtCfMeasVoltage";
-            this.txtCfMeasVoltage.Size = new System.Drawing.Size(81, 20);
-            this.txtCfMeasVoltage.TabIndex = 18;
-            this.txtCfMeasVoltage.Text = "0";
-            // 
-            // txtAveRate
-            // 
-            this.txtAveRate.Location = new System.Drawing.Point(9, 214);
-            this.txtAveRate.Name = "txtAveRate";
-            this.txtAveRate.Size = new System.Drawing.Size(81, 20);
-            this.txtAveRate.TabIndex = 26;
-            this.txtAveRate.Text = "4";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(8, 198);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(81, 13);
-            this.label17.TabIndex = 25;
-            this.label17.Text = "Averaging Rate";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.rbInterLong);
-            this.groupBox4.Controls.Add(this.rbInterMedium);
-            this.groupBox4.Controls.Add(this.rbInterShort);
-            this.groupBox4.Location = new System.Drawing.Point(9, 105);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(131, 90);
-            this.groupBox4.TabIndex = 24;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Intergration Time";
-            // 
-            // rbInterLong
-            // 
-            this.rbInterLong.AutoSize = true;
-            this.rbInterLong.Location = new System.Drawing.Point(6, 67);
-            this.rbInterLong.Name = "rbInterLong";
-            this.rbInterLong.Size = new System.Drawing.Size(55, 17);
-            this.rbInterLong.TabIndex = 2;
-            this.rbInterLong.Text = "LONG";
-            this.rbInterLong.UseVisualStyleBackColor = true;
-            this.rbInterLong.CheckedChanged += new System.EventHandler(this.rbInterLong_CheckedChanged);
-            // 
-            // rbInterMedium
-            // 
-            this.rbInterMedium.AutoSize = true;
-            this.rbInterMedium.Checked = true;
-            this.rbInterMedium.Location = new System.Drawing.Point(6, 44);
-            this.rbInterMedium.Name = "rbInterMedium";
-            this.rbInterMedium.Size = new System.Drawing.Size(69, 17);
-            this.rbInterMedium.TabIndex = 1;
-            this.rbInterMedium.TabStop = true;
-            this.rbInterMedium.Text = "MEDIUM";
-            this.rbInterMedium.UseVisualStyleBackColor = true;
-            this.rbInterMedium.CheckedChanged += new System.EventHandler(this.rbInterMedium_CheckedChanged);
-            // 
-            // rbInterShort
-            // 
-            this.rbInterShort.AutoSize = true;
-            this.rbInterShort.Location = new System.Drawing.Point(6, 22);
-            this.rbInterShort.Name = "rbInterShort";
-            this.rbInterShort.Size = new System.Drawing.Size(63, 17);
-            this.rbInterShort.TabIndex = 0;
-            this.rbInterShort.Text = "SHORT";
-            this.rbInterShort.UseVisualStyleBackColor = true;
-            this.rbInterShort.CheckedChanged += new System.EventHandler(this.rbInterShort_CheckedChanged);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.rbSeries);
-            this.groupBox5.Controls.Add(this.rbParallel);
-            this.groupBox5.Location = new System.Drawing.Point(0, 240);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(117, 72);
-            this.groupBox5.TabIndex = 27;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Equivalent Circuit";
-            // 
-            // rbSeries
-            // 
-            this.rbSeries.AutoSize = true;
-            this.rbSeries.Location = new System.Drawing.Point(15, 42);
-            this.rbSeries.Name = "rbSeries";
-            this.rbSeries.Size = new System.Drawing.Size(54, 17);
-            this.rbSeries.TabIndex = 2;
-            this.rbSeries.TabStop = true;
-            this.rbSeries.Text = "Series";
-            this.rbSeries.UseVisualStyleBackColor = true;
-            // 
-            // rbParallel
-            // 
-            this.rbParallel.AutoSize = true;
-            this.rbParallel.Checked = true;
-            this.rbParallel.Location = new System.Drawing.Point(15, 19);
-            this.rbParallel.Name = "rbParallel";
-            this.rbParallel.Size = new System.Drawing.Size(59, 17);
-            this.rbParallel.TabIndex = 1;
-            this.rbParallel.TabStop = true;
-            this.rbParallel.Text = "Parallel";
-            this.rbParallel.UseVisualStyleBackColor = true;
             // 
             // chart1
             // 
@@ -700,35 +717,62 @@
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(195, 152);
+            this.chart1.Size = new System.Drawing.Size(234, 188);
             this.chart1.TabIndex = 11;
             this.chart1.Text = "chart1";
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(597, 215);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(68, 23);
-            this.button5.TabIndex = 20;
-            this.button5.Text = "Pause";
-            this.button5.UseVisualStyleBackColor = true;
             // 
             // labelVersion
             // 
             this.labelVersion.AutoSize = true;
             this.labelVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 5F);
-            this.labelVersion.Location = new System.Drawing.Point(10, 509);
+            this.labelVersion.Location = new System.Drawing.Point(10, 534);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(33, 7);
             this.labelVersion.TabIndex = 12;
             this.labelVersion.Text = "Origin0.1";
             this.labelVersion.Click += new System.EventHandler(this.labelVersion_Click);
             // 
+            // buttonSubmit
+            // 
+            this.buttonSubmit.Location = new System.Drawing.Point(9, 343);
+            this.buttonSubmit.Name = "buttonSubmit";
+            this.buttonSubmit.Size = new System.Drawing.Size(75, 23);
+            this.buttonSubmit.TabIndex = 13;
+            this.buttonSubmit.Text = "Submit";
+            this.buttonSubmit.UseVisualStyleBackColor = true;
+            this.buttonSubmit.Click += new System.EventHandler(this.buttonSubmit_Click);
+            // 
+            // txtFrequency
+            // 
+            this.txtFrequency.Location = new System.Drawing.Point(9, 31);
+            this.txtFrequency.Name = "txtFrequency";
+            this.txtFrequency.Size = new System.Drawing.Size(81, 20);
+            this.txtFrequency.TabIndex = 28;
+            this.txtFrequency.Text = "1000";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 13);
+            this.label3.TabIndex = 29;
+            this.label3.Text = "Frequency";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(96, 34);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(20, 13);
+            this.label4.TabIndex = 30;
+            this.label4.Text = "Hz";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(868, 523);
+            this.ClientSize = new System.Drawing.Size(868, 550);
             this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.buttonClear);
@@ -750,14 +794,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureConn)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -805,10 +849,10 @@
         private System.Windows.Forms.Label labelMea2_Unit;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox txtCfOscVoltage;
+        private System.Windows.Forms.TextBox txtOscVoltage;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.TextBox txtCfMeasVoltage;
+        private System.Windows.Forms.TextBox txtMeasVoltage;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
@@ -825,6 +869,10 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Label labelVersion;
+        private System.Windows.Forms.Button buttonSubmit;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtFrequency;
     }
 }
 

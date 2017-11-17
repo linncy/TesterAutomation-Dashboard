@@ -21,7 +21,11 @@ namespace TesterAutomation_Dashboard
         private void Form1_Load(object sender, EventArgs e)
         {
             labelInt_Value.Text = Inter().TrimEnd(',');
+
         }
+        //Global Var
+        string Func = "CpRp";
+        bool GPIBstatus = false;
 
         // GPIB instruments on the GPIB0 interface
         // Change this variable to the address of your instrument
@@ -68,8 +72,108 @@ namespace TesterAutomation_Dashboard
             return result;
         }
 
+        private string[] sendCommand(string comm)
+        {
+            string Comm;
+            string idnResponse;
+            string[] normalreturn = { DateTime.Now.ToString(), ":success" };
+            try
+            {
+                switch (comm)
+                {
+                    case "APER":
+                        Comm = comm + " " + Inter() + txtAveRate.Text;
+                        formattedIO.WriteLine(Comm);
+                        formattedIO.WriteLine("APER?");
+                        idnResponse = formattedIO.ReadLine().Replace("\n", "");
+                        return normalreturn;
+                    case "Volt":
+                        Comm = comm + " " + txtOscVoltage.Text + "mV";
+                        formattedIO.WriteLine(Comm);
+                        formattedIO.WriteLine("VOLT?");
+                        idnResponse = formattedIO.ReadLine().Replace("\n", "");
+                        return normalreturn;
+                    case "Freq":
+                        Comm = comm + " " + txtFrequency.Text + "Hz";
+                        formattedIO.WriteLine(Comm);
+                        formattedIO.WriteLine("Freq?");
+                        idnResponse = formattedIO.ReadLine().Replace("\n", "");
+                        return normalreturn;
+                    case "Func:IMP CPG":
+                        Comm = comm;
+                        formattedIO.WriteLine(Comm);
+                        formattedIO.WriteLine("Func:IMP?");
+                        idnResponse = formattedIO.ReadLine().Replace("\n", "");
+                        return normalreturn;
+                    case "Func:IMP CSRS":
+                        Comm = comm;
+                        formattedIO.WriteLine(Comm);
+                        formattedIO.WriteLine("Func:IMP?");
+                        idnResponse = formattedIO.ReadLine().Replace("\n", "");
+                        return normalreturn;
+                    case "BIAS:STAT 1":
+                        Comm = comm;
+                        formattedIO.WriteLine(Comm);
+                        formattedIO.WriteLine("BIAS:STAT?");
+                        idnResponse = formattedIO.ReadLine().Replace("\n", "");
+                        return normalreturn;
+                    case "BIAS:STAT 0":
+                        Comm = comm;
+                        formattedIO.WriteLine(Comm);
+                        formattedIO.WriteLine("BIAS:STAT?");
+                        idnResponse = formattedIO.ReadLine().Replace("\n", "");
+                        return normalreturn;
+                    case "Fetch?":
+                        string[] idnResponseFetch;
+                        Comm = comm;
+                        formattedIO.WriteLine(Comm);
+                        idnResponse = formattedIO.ReadLine().Replace("\n", "");
+                        idnResponseFetch = idnResponse.Split(new string[] { "," }, StringSplitOptions.None);
+                        return idnResponseFetch;
+
+                    //Special Fetch
+                    case "Fetch?[Special]":
+                        string[] idnResponseFetchSpecial;
+                        Comm = "Fetch?";
+                        System.Threading.Thread.Sleep(1000);
+                        formattedIO.WriteLine(Comm);
+                        while (1 == 1)
+                        {
+                            try
+                            {
+                                System.Threading.Thread.Sleep(1000);
+                                idnResponse = formattedIO.ReadLine().Replace("\n", "");
+                                break;
+                            }
+                            catch
+                            {
+
+                            }
+                        }
+                        idnResponseFetchSpecial = idnResponse.Split(new string[] { "," }, StringSplitOptions.None);
+                        return idnResponseFetchSpecial;
+
+                    case "Fetch?[Special2]":
+                        string[] idnResponseFetchSpecial2;
+                        Comm = "Fetch?";
+                        System.Threading.Thread.Sleep(100);
+                        formattedIO.WriteLine(Comm);
+                        System.Threading.Thread.Sleep(100);
+                        idnResponse = formattedIO.ReadLine().Replace("\n", "");
+                        idnResponseFetchSpecial2 = idnResponse.Split(new string[] { "," }, StringSplitOptions.None);
+                        return idnResponseFetchSpecial2;
+                }
+            }
+            catch (NativeVisaException visaException)
+            {
+                return null;
+            }
+            return null;
+        }
+
         private void cpRpToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Func = "CpRp";
             labelFunc_Value.Text = "Cp-Rp";
             labelMea2.Text = "Rp:";
             labelMea2_Unit.Text = "Ω";
@@ -89,6 +193,7 @@ namespace TesterAutomation_Dashboard
 
         private void cpDpToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Func = "CpDp";
             labelFunc_Value.Text = "Cp-Dp";
             labelMea2.Text = "Dp:";
             labelMea2_Unit.Text = "S";
@@ -100,11 +205,13 @@ namespace TesterAutomation_Dashboard
             {
                 pictureConn.Image = global::TesterAutomation_Dashboard.Properties.Resources.green;
                 labelConn_Value.Text = "Success";
+                GPIBstatus = true;
             }
             else
             {
                 pictureConn.Image = global::TesterAutomation_Dashboard.Properties.Resources.red;
                 labelConn_Value.Text = "Fail";
+                GPIBstatus = false;
             }
         }
 
@@ -131,6 +238,21 @@ namespace TesterAutomation_Dashboard
         private void labelVersion_Click(object sender, EventArgs e)
         {
             MessageBox.Show("LRC Meter Dashboard \nDeveloped for Agilent 4284A Precision LCR Meter\nVersion Origin0.1\nBuilt on 11/17/2017", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void buttonSubmit_Click(object sender, EventArgs e)
+        {
+            string Comm;
+            if(!GPIBstatus)
+            {
+                MessageBox.Show("Please Connect Instrument.", "No GPIB Connection", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            sendCommand("BIAS:STAT 1");
+            Comm = "BIAS:VOLT " + txtMeasVoltage.Text + "V";
+            formattedIO.WriteLine(Comm);
+            Comm = "Volt" + " " + txtOscVoltage.Text + "mV";
+            formattedIO.WriteLine(Comm);
         }
     }
 }
