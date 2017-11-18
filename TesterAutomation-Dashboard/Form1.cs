@@ -13,6 +13,24 @@ namespace TesterAutomation_Dashboard
 {
     public partial class Form1 : Form
     {
+        //Global Var
+        string Func = "CpGpRp";
+        bool GPIBstatus = false;
+        string[] Cp_Unit = { "F", "mF", "μF", "nF", "pF" };
+        string[] Gp_Unit = { "S", "mS", "μS", "nS", "pS" };
+        string[] Rp_Unit = { "Ω", "kΩ", "MΩ" };
+        int Cp_Unit_order = 0;
+        int Gp_Unit_order = 0;
+        int Rp_Unit_order = 0;
+
+        public enum DashboardState
+        {
+            noconnection,
+            running,
+            pause
+        }
+        DashboardState state = DashboardState.noconnection;
+
         public Form1()
         {
             InitializeComponent();
@@ -21,11 +39,31 @@ namespace TesterAutomation_Dashboard
         private void Form1_Load(object sender, EventArgs e)
         {
             labelInt_Value.Text = Inter().TrimEnd(',');
+            labelMea1_Unit.Text = Cp_Unit[Cp_Unit_order];
+            labelMea2_Unit.Text = Gp_Unit[Gp_Unit_order];
+            labelMea3_Unit.Text = Rp_Unit[Rp_Unit_order];
+            buttonPause_Changestate(state);
 
         }
-        //Global Var
-        string Func = "CpRp";
-        bool GPIBstatus = false;
+
+        private void buttonPause_Changestate(DashboardState type)
+        {
+            if(type==DashboardState.noconnection)
+            {
+                buttonDashboardPause.Text = "No Connection";
+                buttonDashboardPause.Enabled = false;
+            }
+            else if(type==DashboardState.running)
+            {
+                buttonDashboardPause.Text = "Pause";
+                buttonDashboardPause.Enabled = true;
+            }
+            else if(type==DashboardState.pause)
+            {
+                buttonDashboardPause.Text = "Resume";
+                buttonDashboardPause.Enabled = true;
+            }
+        }
 
         // GPIB instruments on the GPIB0 interface
         // Change this variable to the address of your instrument
@@ -171,16 +209,6 @@ namespace TesterAutomation_Dashboard
             return null;
         }
 
-        private void cpRpToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Func = "CpRp";
-            labelFunc_Value.Text = "Cp-Rp";
-            labelMea2.Text = "Rp:";
-            labelMea2_Unit.Text = "Ω";
-            labelS1.Text = "Vm:";
-            labelS2.Text = "Im:";
-        }
-
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -191,14 +219,6 @@ namespace TesterAutomation_Dashboard
 
         }
 
-        private void cpDpToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Func = "CpDp";
-            labelFunc_Value.Text = "Cp-Dp";
-            labelMea2.Text = "Dp:";
-            labelMea2_Unit.Text = "S";
-        }
-
         private void buttonConn_Click(object sender, EventArgs e)
         {
             if(openGPIB())
@@ -206,12 +226,17 @@ namespace TesterAutomation_Dashboard
                 pictureConn.Image = global::TesterAutomation_Dashboard.Properties.Resources.green;
                 labelConn_Value.Text = "Success";
                 GPIBstatus = true;
+                state = DashboardState.running;
+                buttonPause_Changestate(state);
+                initializemeasure();
             }
             else
             {
                 pictureConn.Image = global::TesterAutomation_Dashboard.Properties.Resources.red;
                 labelConn_Value.Text = "Fail";
                 GPIBstatus = false;
+                state = DashboardState.noconnection;
+                buttonPause_Changestate(state);
             }
         }
 
@@ -239,7 +264,29 @@ namespace TesterAutomation_Dashboard
         {
             MessageBox.Show("LRC Meter Dashboard \nDeveloped for Agilent 4284A Precision LCR Meter\nVersion Origin0.1\nBuilt on 11/17/2017", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
+        private void initializemeasure()
+        {
+            string Comm;
+            Comm = "Freq" + " " + "1000" + "Hz";
+            formattedIO.WriteLine(Comm);
+            labelFreq_Value.Text ="1KHz";
+            sendCommand("BIAS:STAT 1");
+            Comm = "BIAS:VOLT " + "0" + "V";
+            formattedIO.WriteLine(Comm);
+            labelBias_Value.Text = "0";
+            Comm = "Volt" + " " + "25" + "mV";
+            formattedIO.WriteLine(Comm);
+            labelLevel_Value.Text = "25mV";
+            if (rbParallel.Checked == true)
+            {
+                sendCommand("Func:IMP CPG");
+            }
+            else if (rbSeries.Checked == true)
+            {
+                sendCommand("Func:IMP CSRS");
+            }
+            sendCommand("APER");
+        }
         private void buttonSubmit_Click(object sender, EventArgs e)
         {
             string Comm;
@@ -248,11 +295,79 @@ namespace TesterAutomation_Dashboard
                 MessageBox.Show("Please Connect Instrument.", "No GPIB Connection", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            Comm = "Freq" + " " + txtFrequency.Text + "Hz";
+            formattedIO.WriteLine(Comm);
+            labelFreq_Value.Text = txtFrequency.Text + "Hz";
             sendCommand("BIAS:STAT 1");
             Comm = "BIAS:VOLT " + txtMeasVoltage.Text + "V";
             formattedIO.WriteLine(Comm);
             Comm = "Volt" + " " + txtOscVoltage.Text + "mV";
             formattedIO.WriteLine(Comm);
+            if (rbParallel.Checked == true)
+            {
+                sendCommand("Func:IMP CPG");
+            }
+            else if (rbSeries.Checked == true)
+            {
+                sendCommand("Func:IMP CSRS");
+            }
+            sendCommand("APER");
+        }
+
+        private void cpGpRpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Func = "CpGpRp";
+        }
+
+        private void buttonFS1K_Click(object sender, EventArgs e)
+        {
+            labelFreq_Value.Text = "1KHz";
+        }
+        private void buttonFS10K_Click(object sender, EventArgs e)
+        {
+            labelFreq_Value.Text = "10KHz";
+        }
+        private void buttonFS100K_Click(object sender, EventArgs e)
+        {
+            labelFreq_Value.Text = "100KHz";
+        }
+        private void buttonFS1M_Click(object sender, EventArgs e)
+        {
+            labelFreq_Value.Text = "1MHz";
+        }
+
+        private void buttonUSCp_Click(object sender, EventArgs e)
+        {
+            Cp_Unit_order = Cp_Unit_order < 4 ? Cp_Unit_order+1 : 0;
+            labelMea1_Unit.Text = Cp_Unit[Cp_Unit_order];
+        }
+
+        private void buttonUSGp_Click(object sender, EventArgs e)
+        {
+            Gp_Unit_order = Gp_Unit_order < 4 ? Gp_Unit_order + 1 : 0;
+            labelMea2_Unit.Text = Gp_Unit[Gp_Unit_order];
+        }
+
+        private void buttonUSRp_Click(object sender, EventArgs e)
+        {
+            Rp_Unit_order = Rp_Unit_order < 2 ? Rp_Unit_order + 1 : 0;
+            labelMea3_Unit.Text = Rp_Unit[Rp_Unit_order];
+        }
+
+        private void buttonUSDefault_Click(object sender, EventArgs e)
+        {
+            Cp_Unit_order = 0;
+            Gp_Unit_order = 0;
+            Rp_Unit_order = 0;
+            labelMea1_Unit.Text = Cp_Unit[Cp_Unit_order];
+            labelMea2_Unit.Text = Gp_Unit[Gp_Unit_order];
+            labelMea3_Unit.Text = Rp_Unit[Rp_Unit_order];
+        }
+
+        private void buttonDashboardPause_Click(object sender, EventArgs e)
+        {
+            state = state == DashboardState.running ? DashboardState.pause : DashboardState.running;
+            buttonPause_Changestate(state);
         }
     }
 }
