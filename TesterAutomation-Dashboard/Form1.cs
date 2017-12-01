@@ -16,12 +16,15 @@ namespace TesterAutomation_Dashboard
         //Global Var
         string Func = "CpGpRp";
         bool GPIBstatus = false;
+        bool PauseIsTrue = false;
         string[] Cp_Unit = { "F", "mF", "μF", "nF", "pF" };
         string[] Gp_Unit = { "S", "mS", "μS", "nS", "pS" };
         string[] Rp_Unit = { "Ω", "kΩ", "MΩ" };
         int Cp_Unit_order = 0;
         int Gp_Unit_order = 0;
         int Rp_Unit_order = 0;
+        System.Threading.ThreadStart MonitorThreadStart;
+        System.Threading.Thread MonitorThread;
 
         public enum DashboardState
         {
@@ -42,28 +45,9 @@ namespace TesterAutomation_Dashboard
             labelMea1_Unit.Text = Cp_Unit[Cp_Unit_order];
             labelMea2_Unit.Text = Gp_Unit[Gp_Unit_order];
             labelMea3_Unit.Text = Rp_Unit[Rp_Unit_order];
-            buttonPause_Changestate(state);
-
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
-        private void buttonPause_Changestate(DashboardState type)
-        {
-            if(type==DashboardState.noconnection)
-            {
-                buttonDashboardPause.Text = "No Connection";
-                buttonDashboardPause.Enabled = false;
-            }
-            else if(type==DashboardState.running)
-            {
-                buttonDashboardPause.Text = "Pause";
-                buttonDashboardPause.Enabled = true;
-            }
-            else if(type==DashboardState.pause)
-            {
-                buttonDashboardPause.Text = "Resume";
-                buttonDashboardPause.Enabled = true;
-            }
-        }
 
         // GPIB instruments on the GPIB0 interface
         // Change this variable to the address of your instrument
@@ -138,6 +122,12 @@ namespace TesterAutomation_Dashboard
                         idnResponse = formattedIO.ReadLine().Replace("\n", "");
                         return normalreturn;
                     case "Func:IMP CPG":
+                        Comm = comm;
+                        formattedIO.WriteLine(Comm);
+                        formattedIO.WriteLine("Func:IMP?");
+                        idnResponse = formattedIO.ReadLine().Replace("\n", "");
+                        return normalreturn;
+                    case "Func:IMP CPRP":
                         Comm = comm;
                         formattedIO.WriteLine(Comm);
                         formattedIO.WriteLine("Func:IMP?");
@@ -223,11 +213,13 @@ namespace TesterAutomation_Dashboard
         {
             if(openGPIB())
             {
+
                 pictureConn.Image = global::TesterAutomation_Dashboard.Properties.Resources.green;
                 labelConn_Value.Text = "Success";
+                pictureState.Image = global::TesterAutomation_Dashboard.Properties.Resources.green;
+                labelState_Value.Text = "Running";
                 GPIBstatus = true;
                 state = DashboardState.running;
-                buttonPause_Changestate(state);
                 initializemeasure();
             }
             else
@@ -236,7 +228,6 @@ namespace TesterAutomation_Dashboard
                 labelConn_Value.Text = "Fail";
                 GPIBstatus = false;
                 state = DashboardState.noconnection;
-                buttonPause_Changestate(state);
             }
         }
 
@@ -286,6 +277,13 @@ namespace TesterAutomation_Dashboard
                 sendCommand("Func:IMP CSRS");
             }
             sendCommand("APER");
+
+            buttonPause.Enabled = true;
+            state = DashboardState.running;
+            MonitorThreadStart = new System.Threading.ThreadStart(CGRmonitor);
+            MonitorThread = new System.Threading.Thread(MonitorThreadStart);
+            MonitorThread.IsBackground = true;
+            MonitorThread.Start();
         }
         private void buttonSubmit_Click(object sender, EventArgs e)
         {
@@ -312,6 +310,65 @@ namespace TesterAutomation_Dashboard
                 sendCommand("Func:IMP CSRS");
             }
             sendCommand("APER");
+        }
+
+        public int MeaLabelModify(int MeaLabelNumber,double value)
+        {
+            if(PauseIsTrue==true)
+            {
+                return 0;
+            }
+            else
+            {
+                if(MeaLabelNumber==1)
+                {
+                    labelMea1_Value.Text = Convert.ToString(value);
+                }
+                else if(MeaLabelNumber == 2)
+                {
+                    labelMea2_Value.Text = Convert.ToString(value);
+                }
+                else if(MeaLabelNumber == 3)
+                {
+                    labelMea3_Value.Text = Convert.ToString(value);
+                }
+                return 1;
+            }
+        }
+
+        private double CpMonitor()
+        {
+            string[] FetchResult;
+            FetchResult = sendCommand("Fetch?");
+            return Convert.ToDouble(FetchResult[0]);
+        }
+        private double GpMonitor()
+        {
+            string[] FetchResult;
+            FetchResult = sendCommand("Fetch?");
+            return Convert.ToDouble(FetchResult[1]);
+        }
+        private double RpMonitor()
+        {
+            string[] FetchResult;
+            FetchResult = sendCommand("Fetch?");
+            return Convert.ToDouble(FetchResult[1]);
+        }
+        private void CGRmonitor()
+        {
+            while(1==1)
+            {
+                sendCommand("Func:IMP CPG");
+                System.Threading.Thread.Sleep(250);
+                double Cp = CpMonitor();
+                double Gp = GpMonitor();
+                sendCommand("Func:IMP CPRP");
+                System.Threading.Thread.Sleep(250);
+                double Rp = RpMonitor();
+                MeaLabelModify(1, Cp);
+                MeaLabelModify(2, Gp);
+                MeaLabelModify(3, Rp);
+            }
         }
 
         private void cpGpRpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -364,10 +421,32 @@ namespace TesterAutomation_Dashboard
             labelMea3_Unit.Text = Rp_Unit[Rp_Unit_order];
         }
 
-        private void buttonDashboardPause_Click(object sender, EventArgs e)
+        private void buttonTest1_Click(object sender, EventArgs e)
         {
-            state = state == DashboardState.running ? DashboardState.pause : DashboardState.running;
-            buttonPause_Changestate(state);
+            buttonPause.Enabled = true;
+            state =  DashboardState.running;
+            MonitorThreadStart = new System.Threading.ThreadStart(CGRmonitor);
+            MonitorThread = new System.Threading.Thread(MonitorThreadStart);
+            MonitorThread.IsBackground = true;
+            MonitorThread.Start();
+        }
+
+        private void buttonPause_Click(object sender, EventArgs e)
+        {
+            pictureState.Image = global::TesterAutomation_Dashboard.Properties.Resources.red;
+            labelState_Value.Text = "Not Running";
+            MonitorThread.Suspend();
+            buttonPause.Enabled = false;
+            buttonResume.Enabled = true;
+        }
+
+        private void buttonResume_Click(object sender, EventArgs e)
+        {
+            pictureState.Image = global::TesterAutomation_Dashboard.Properties.Resources.green;
+            labelState_Value.Text = "Running";
+            MonitorThread.Resume();
+            buttonPause.Enabled = true;
+            buttonResume.Enabled = false;
         }
     }
 }

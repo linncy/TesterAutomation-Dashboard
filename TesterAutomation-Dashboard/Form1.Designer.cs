@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelFunc_Value = new System.Windows.Forms.Label();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            this.labelState = new System.Windows.Forms.Label();
+            this.labelState_Value = new System.Windows.Forms.Label();
             this.groupBoxStatus = new System.Windows.Forms.GroupBox();
             this.buttonConn = new System.Windows.Forms.Button();
             this.pictureConn = new System.Windows.Forms.PictureBox();
@@ -40,6 +40,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.buttonTest1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtFrequency = new System.Windows.Forms.TextBox();
             this.buttonSubmit = new System.Windows.Forms.Button();
@@ -59,10 +60,11 @@
             this.label33 = new System.Windows.Forms.Label();
             this.txtMeasVoltage = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonResume = new System.Windows.Forms.Button();
+            this.buttonPause = new System.Windows.Forms.Button();
             this.labelMea2_Unit = new System.Windows.Forms.Label();
             this.labelMea2_Value = new System.Windows.Forms.Label();
             this.labelMea2 = new System.Windows.Forms.Label();
-            this.buttonDashboardPause = new System.Windows.Forms.Button();
             this.labelS2_Value = new System.Windows.Forms.Label();
             this.labelS2_Unit = new System.Windows.Forms.Label();
             this.labelS2 = new System.Windows.Forms.Label();
@@ -102,6 +104,7 @@
             this.buttonUSRp = new System.Windows.Forms.Button();
             this.buttonUSGp = new System.Windows.Forms.Button();
             this.buttonUSCp = new System.Windows.Forms.Button();
+            this.pictureState = new System.Windows.Forms.PictureBox();
             this.groupBoxStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureConn)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -113,37 +116,39 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureState)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // labelState
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(6, 86);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Func:";
+            this.labelState.AutoSize = true;
+            this.labelState.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.labelState.Location = new System.Drawing.Point(6, 86);
+            this.labelState.Name = "labelState";
+            this.labelState.Size = new System.Drawing.Size(52, 17);
+            this.labelState.TabIndex = 1;
+            this.labelState.Text = "Status:";
             // 
-            // labelFunc_Value
+            // labelState_Value
             // 
-            this.labelFunc_Value.AutoSize = true;
-            this.labelFunc_Value.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.labelFunc_Value.Location = new System.Drawing.Point(51, 86);
-            this.labelFunc_Value.Name = "labelFunc_Value";
-            this.labelFunc_Value.Size = new System.Drawing.Size(48, 17);
-            this.labelFunc_Value.TabIndex = 2;
-            this.labelFunc_Value.Text = "Cp-Rp";
-            this.labelFunc_Value.Click += new System.EventHandler(this.labelFunc_Click);
+            this.labelState_Value.AutoSize = true;
+            this.labelState_Value.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.labelState_Value.Location = new System.Drawing.Point(51, 86);
+            this.labelState_Value.Name = "labelState_Value";
+            this.labelState_Value.Size = new System.Drawing.Size(87, 17);
+            this.labelState_Value.TabIndex = 2;
+            this.labelState_Value.Text = "Not Running";
+            this.labelState_Value.Click += new System.EventHandler(this.labelFunc_Click);
             // 
             // groupBoxStatus
             // 
+            this.groupBoxStatus.Controls.Add(this.pictureState);
             this.groupBoxStatus.Controls.Add(this.buttonConn);
             this.groupBoxStatus.Controls.Add(this.pictureConn);
             this.groupBoxStatus.Controls.Add(this.labelConn_Value);
             this.groupBoxStatus.Controls.Add(this.label2);
-            this.groupBoxStatus.Controls.Add(this.labelFunc_Value);
-            this.groupBoxStatus.Controls.Add(this.label1);
+            this.groupBoxStatus.Controls.Add(this.labelState_Value);
+            this.groupBoxStatus.Controls.Add(this.labelState);
             this.groupBoxStatus.Location = new System.Drawing.Point(12, 36);
             this.groupBoxStatus.Name = "groupBoxStatus";
             this.groupBoxStatus.Size = new System.Drawing.Size(166, 117);
@@ -196,6 +201,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.buttonTest1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtFrequency);
             this.groupBox1.Controls.Add(this.buttonSubmit);
@@ -224,6 +230,16 @@
             this.label4.Size = new System.Drawing.Size(20, 13);
             this.label4.TabIndex = 30;
             this.label4.Text = "Hz";
+            // 
+            // buttonTest1
+            // 
+            this.buttonTest1.Location = new System.Drawing.Point(85, 343);
+            this.buttonTest1.Name = "buttonTest1";
+            this.buttonTest1.Size = new System.Drawing.Size(75, 23);
+            this.buttonTest1.TabIndex = 13;
+            this.buttonTest1.Text = "Test1";
+            this.buttonTest1.UseVisualStyleBackColor = true;
+            this.buttonTest1.Click += new System.EventHandler(this.buttonTest1_Click);
             // 
             // label3
             // 
@@ -404,10 +420,11 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.buttonResume);
+            this.groupBox2.Controls.Add(this.buttonPause);
             this.groupBox2.Controls.Add(this.labelMea2_Unit);
             this.groupBox2.Controls.Add(this.labelMea2_Value);
             this.groupBox2.Controls.Add(this.labelMea2);
-            this.groupBox2.Controls.Add(this.buttonDashboardPause);
             this.groupBox2.Controls.Add(this.labelS2_Value);
             this.groupBox2.Controls.Add(this.labelS2_Unit);
             this.groupBox2.Controls.Add(this.labelS2);
@@ -434,6 +451,28 @@
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Dashboard";
+            // 
+            // buttonResume
+            // 
+            this.buttonResume.Enabled = false;
+            this.buttonResume.Location = new System.Drawing.Point(608, 216);
+            this.buttonResume.Name = "buttonResume";
+            this.buttonResume.Size = new System.Drawing.Size(75, 23);
+            this.buttonResume.TabIndex = 25;
+            this.buttonResume.Text = "Resume";
+            this.buttonResume.UseVisualStyleBackColor = true;
+            this.buttonResume.Click += new System.EventHandler(this.buttonResume_Click);
+            // 
+            // buttonPause
+            // 
+            this.buttonPause.Enabled = false;
+            this.buttonPause.Location = new System.Drawing.Point(531, 216);
+            this.buttonPause.Name = "buttonPause";
+            this.buttonPause.Size = new System.Drawing.Size(75, 23);
+            this.buttonPause.TabIndex = 24;
+            this.buttonPause.Text = "Pause";
+            this.buttonPause.UseVisualStyleBackColor = true;
+            this.buttonPause.Click += new System.EventHandler(this.buttonPause_Click);
             // 
             // labelMea2_Unit
             // 
@@ -464,16 +503,6 @@
             this.labelMea2.Size = new System.Drawing.Size(58, 31);
             this.labelMea2.TabIndex = 21;
             this.labelMea2.Text = "Gp:";
-            // 
-            // buttonDashboardPause
-            // 
-            this.buttonDashboardPause.Location = new System.Drawing.Point(530, 216);
-            this.buttonDashboardPause.Name = "buttonDashboardPause";
-            this.buttonDashboardPause.Size = new System.Drawing.Size(156, 23);
-            this.buttonDashboardPause.TabIndex = 20;
-            this.buttonDashboardPause.Text = "Pause";
-            this.buttonDashboardPause.UseVisualStyleBackColor = true;
-            this.buttonDashboardPause.Click += new System.EventHandler(this.buttonDashboardPause_Click);
             // 
             // labelS2_Value
             // 
@@ -765,16 +794,16 @@
             // 
             // chart1
             // 
-            chartArea9.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea9);
-            legend9.Name = "Legend1";
-            this.chart1.Legends.Add(legend9);
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart1.Legends.Add(legend3);
             this.chart1.Location = new System.Drawing.Point(184, 350);
             this.chart1.Name = "chart1";
-            series9.ChartArea = "ChartArea1";
-            series9.Legend = "Legend1";
-            series9.Name = "Series1";
-            this.chart1.Series.Add(series9);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart1.Series.Add(series3);
             this.chart1.Size = new System.Drawing.Size(255, 188);
             this.chart1.TabIndex = 11;
             this.chart1.Text = "chart1";
@@ -866,6 +895,16 @@
             this.buttonUSCp.UseVisualStyleBackColor = true;
             this.buttonUSCp.Click += new System.EventHandler(this.buttonUSCp_Click);
             // 
+            // pictureState
+            // 
+            this.pictureState.Image = global::TesterAutomation_Dashboard.Properties.Resources.red;
+            this.pictureState.Location = new System.Drawing.Point(141, 86);
+            this.pictureState.Name = "pictureState";
+            this.pictureState.Size = new System.Drawing.Size(19, 17);
+            this.pictureState.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureState.TabIndex = 5;
+            this.pictureState.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -903,14 +942,15 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureState)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label labelFunc_Value;
+        private System.Windows.Forms.Label labelState;
+        private System.Windows.Forms.Label labelState_Value;
         private System.Windows.Forms.GroupBox groupBoxStatus;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureConn;
@@ -962,7 +1002,6 @@
         private System.Windows.Forms.RadioButton rbInterLong;
         private System.Windows.Forms.RadioButton rbInterMedium;
         private System.Windows.Forms.RadioButton rbInterShort;
-        private System.Windows.Forms.Button buttonDashboardPause;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Button buttonSubmit;
@@ -980,6 +1019,10 @@
         private System.Windows.Forms.Button buttonUSRp;
         private System.Windows.Forms.Button buttonUSGp;
         private System.Windows.Forms.Button buttonUSCp;
+        private System.Windows.Forms.Button buttonTest1;
+        private System.Windows.Forms.Button buttonPause;
+        private System.Windows.Forms.Button buttonResume;
+        private System.Windows.Forms.PictureBox pictureState;
     }
 }
 
