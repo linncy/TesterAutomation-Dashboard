@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Ivi.Visa;
 using Ivi.Visa.FormattedIO;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace TesterAutomation_Dashboard
 {
@@ -17,14 +18,21 @@ namespace TesterAutomation_Dashboard
         string Func = "CpGpRp";
         bool GPIBstatus = false;
         bool PauseIsTrue = false;
+        bool ratemode = false;
         string[] Cp_Unit = { "F", "mF", "μF", "nF", "pF" };
         string[] Gp_Unit = { "S", "mS", "μS", "nS", "pS" };
         string[] Rp_Unit = { "Ω", "kΩ", "MΩ" };
         int Cp_Unit_order = 0;
         int Gp_Unit_order = 0;
         int Rp_Unit_order = 0;
+        int rate = 200;
+        Int32 n = 0;
         System.Threading.ThreadStart MonitorThreadStart;
         System.Threading.Thread MonitorThread;
+        DataTable dtdata;
+        List<double> listdatax;
+        List<double> listdatay;
+        DataRow newrow;
 
         public enum DashboardState
         {
@@ -63,7 +71,7 @@ namespace TesterAutomation_Dashboard
         {
             try
             {
-                session = GlobalResourceManager.Open(VISA_ADDRESS, AccessModes.None, 50000) as IMessageBasedSession;
+                session = GlobalResourceManager.Open(VISA_ADDRESS, AccessModes.None, 5) as IMessageBasedSession;
                 formattedIO = new MessageBasedFormattedIO(session);
                 MessageBox.Show("The instrument has been successfully connected on GPIB0::25", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
@@ -253,7 +261,7 @@ namespace TesterAutomation_Dashboard
 
         private void labelVersion_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("LRC Meter Dashboard \nDeveloped for Agilent 4284A Precision LCR Meter\nVersion Origin0.1\nBuilt on 11/17/2017", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("LRC Meter Dashboard \nDeveloped for Agilent 4284A Precision LCR Meter\nVersion 1.0\nBuilt on 05/18/2018", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void initializemeasure()
         {
@@ -322,15 +330,15 @@ namespace TesterAutomation_Dashboard
             {
                 if(MeaLabelNumber==1)
                 {
-                    labelMea1_Value.Text = Convert.ToString(value);
+                    labelMea1_Value.Text = Convert.ToString(Cp_Unit_order==0?value:value*System.Math.Pow(10,3*Cp_Unit_order));
                 }
                 else if(MeaLabelNumber == 2)
                 {
-                    labelMea2_Value.Text = Convert.ToString(value);
+                    labelMea2_Value.Text = Convert.ToString(Gp_Unit_order == 0 ? value : value * System.Math.Pow(10, 3 * Gp_Unit_order));
                 }
                 else if(MeaLabelNumber == 3)
                 {
-                    labelMea3_Value.Text = Convert.ToString(value);
+                    labelMea3_Value.Text = Convert.ToString(Rp_Unit_order == 0 ? value : value * System.Math.Pow(10, -3 * Rp_Unit_order));
                 }
                 return 1;
             }
@@ -356,18 +364,31 @@ namespace TesterAutomation_Dashboard
         }
         private void CGRmonitor()
         {
-            while(1==1)
+            while(true)
             {
                 sendCommand("Func:IMP CPG");
-                System.Threading.Thread.Sleep(250);
+                System.Threading.Thread.Sleep(rate);
                 double Cp = CpMonitor();
                 double Gp = GpMonitor();
-                sendCommand("Func:IMP CPRP");
-                System.Threading.Thread.Sleep(250);
-                double Rp = RpMonitor();
+                if (!ratemode)
+                {
+                    sendCommand("Func:IMP CPRP");
+                    System.Threading.Thread.Sleep(250);
+                    double Rp = RpMonitor();
+                    MeaLabelModify(3, Rp);
+                }
                 MeaLabelModify(1, Cp);
                 MeaLabelModify(2, Gp);
-                MeaLabelModify(3, Rp);
+                if(ratemode)
+                {
+                    newrow = dtdata.NewRow();
+                    newrow[0] = rate * n / 1000.0;
+                    newrow[1] = Cp;
+                    dtdata.Rows.InsertAt(newrow, 0);
+                    listdatax.Add(rate * n / 1000.0);
+                    listdatay.Add(Cp);
+                    n++;
+                }
             }
         }
 
@@ -378,18 +399,26 @@ namespace TesterAutomation_Dashboard
 
         private void buttonFS1K_Click(object sender, EventArgs e)
         {
+            string Comm = "Freq" + " 1000"  + "Hz";
+            formattedIO.WriteLine(Comm);
             labelFreq_Value.Text = "1KHz";
         }
         private void buttonFS10K_Click(object sender, EventArgs e)
         {
+            string Comm = "Freq" + " 10000" + "Hz";
+            formattedIO.WriteLine(Comm);
             labelFreq_Value.Text = "10KHz";
         }
         private void buttonFS100K_Click(object sender, EventArgs e)
         {
+            string Comm = "Freq" + " 100000" + "Hz";
+            formattedIO.WriteLine(Comm);
             labelFreq_Value.Text = "100KHz";
         }
         private void buttonFS1M_Click(object sender, EventArgs e)
         {
+            string Comm = "Freq" + " 1000000" + "Hz";
+            formattedIO.WriteLine(Comm);
             labelFreq_Value.Text = "1MHz";
         }
 
@@ -447,6 +476,54 @@ namespace TesterAutomation_Dashboard
             MonitorThread.Resume();
             buttonPause.Enabled = true;
             buttonResume.Enabled = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ratemode = true;
+            if (Convert.ToInt32(textRate.Text) < 200)
+            {
+                MessageBox.Show("The minimum rate is 200ms.", "Error: Invalid Parameter", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            rate = (Convert.ToInt32(textRate.Text));
+            dtdata = new DataTable();
+            listdatax= new List<double>();
+            listdatay= new List<double>();
+            dtdata.Columns.Add("T(s)", typeof(float));
+            dtdata.Columns.Add("C(F)", typeof(float));
+            dgvdata.DataSource = dtdata;
+            timerplot.Interval = 1000;
+            timerplot.Enabled = true;
+        }
+        private void plot(Chart chart, string tag, List<double> listx, List<double> listy)
+        {
+            chart.Series.Clear();
+            Series series = new Series(tag);
+            series.ChartType = SeriesChartType.Spline;
+            series.Points.DataBindXY(listx, listy);
+            chart.Series.Add(series);
+        }
+        private void timerplot_Tick(object sender, EventArgs e)
+        {
+            plot(chartdata, "C-t", listdatax, listdatay);
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            ratemode = false;
+            timerplot.Enabled = false;
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            DataGridViewToCSV(dgvdata);
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            dtdata = new DataTable();
+            dgvdata.DataSource = dtdata;
         }
     }
 }

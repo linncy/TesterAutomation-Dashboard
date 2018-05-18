@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.labelState = new System.Windows.Forms.Label();
             this.labelState_Value = new System.Windows.Forms.Label();
             this.groupBoxStatus = new System.Windows.Forms.GroupBox();
+            this.pictureState = new System.Windows.Forms.PictureBox();
             this.buttonConn = new System.Windows.Forms.Button();
             this.pictureConn = new System.Windows.Forms.PictureBox();
             this.labelConn_Value = new System.Windows.Forms.Label();
@@ -85,38 +87,37 @@
             this.labelLevel = new System.Windows.Forms.Label();
             this.labelBias = new System.Windows.Forms.Label();
             this.labelFreq = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvdata = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.buttonFS1M = new System.Windows.Forms.Button();
             this.buttonFS100K = new System.Windows.Forms.Button();
             this.buttonFS10K = new System.Windows.Forms.Button();
             this.buttonFS1K = new System.Windows.Forms.Button();
-            this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chartdata = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.labelVersion = new System.Windows.Forms.Label();
-            this.cpRpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.cpGpRpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.buttonUSDefault = new System.Windows.Forms.Button();
             this.buttonUSRp = new System.Windows.Forms.Button();
             this.buttonUSGp = new System.Windows.Forms.Button();
             this.buttonUSCp = new System.Windows.Forms.Button();
-            this.pictureState = new System.Windows.Forms.PictureBox();
+            this.textRate = new System.Windows.Forms.TextBox();
+            this.buttonStart = new System.Windows.Forms.Button();
+            this.buttonStop = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.timerplot = new System.Windows.Forms.Timer(this.components);
             this.groupBoxStatus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureState)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureConn)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvdata)).BeginInit();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartdata)).BeginInit();
             this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureState)).BeginInit();
             this.SuspendLayout();
             // 
             // labelState
@@ -149,12 +150,22 @@
             this.groupBoxStatus.Controls.Add(this.label2);
             this.groupBoxStatus.Controls.Add(this.labelState_Value);
             this.groupBoxStatus.Controls.Add(this.labelState);
-            this.groupBoxStatus.Location = new System.Drawing.Point(12, 36);
+            this.groupBoxStatus.Location = new System.Drawing.Point(12, 12);
             this.groupBoxStatus.Name = "groupBoxStatus";
             this.groupBoxStatus.Size = new System.Drawing.Size(166, 117);
             this.groupBoxStatus.TabIndex = 3;
             this.groupBoxStatus.TabStop = false;
             this.groupBoxStatus.Text = "Status";
+            // 
+            // pictureState
+            // 
+            this.pictureState.Image = global::TesterAutomation_Dashboard.Properties.Resources.red;
+            this.pictureState.Location = new System.Drawing.Point(141, 86);
+            this.pictureState.Name = "pictureState";
+            this.pictureState.Size = new System.Drawing.Size(19, 17);
+            this.pictureState.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureState.TabIndex = 5;
+            this.pictureState.TabStop = false;
             // 
             // buttonConn
             // 
@@ -215,7 +226,7 @@
             this.groupBox1.Controls.Add(this.label32);
             this.groupBox1.Controls.Add(this.label33);
             this.groupBox1.Controls.Add(this.txtMeasVoltage);
-            this.groupBox1.Location = new System.Drawing.Point(12, 159);
+            this.groupBox1.Location = new System.Drawing.Point(12, 135);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(166, 372);
             this.groupBox1.TabIndex = 4;
@@ -239,6 +250,7 @@
             this.buttonTest1.TabIndex = 13;
             this.buttonTest1.Text = "Test1";
             this.buttonTest1.UseVisualStyleBackColor = true;
+            this.buttonTest1.Visible = false;
             this.buttonTest1.Click += new System.EventHandler(this.buttonTest1_Click);
             // 
             // label3
@@ -445,7 +457,7 @@
             this.groupBox2.Controls.Add(this.labelLevel);
             this.groupBox2.Controls.Add(this.labelBias);
             this.groupBox2.Controls.Add(this.labelFreq);
-            this.groupBox2.Location = new System.Drawing.Point(184, 39);
+            this.groupBox2.Location = new System.Drawing.Point(184, 15);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(689, 243);
             this.groupBox2.TabIndex = 5;
@@ -704,13 +716,13 @@
             this.labelFreq.TabIndex = 0;
             this.labelFreq.Text = "Frequency:";
             // 
-            // dataGridView1
+            // dgvdata
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(445, 350);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(345, 188);
-            this.dataGridView1.TabIndex = 6;
+            this.dgvdata.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvdata.Location = new System.Drawing.Point(515, 355);
+            this.dgvdata.Name = "dgvdata";
+            this.dgvdata.Size = new System.Drawing.Size(274, 188);
+            this.dgvdata.TabIndex = 6;
             // 
             // groupBox3
             // 
@@ -718,7 +730,7 @@
             this.groupBox3.Controls.Add(this.buttonFS100K);
             this.groupBox3.Controls.Add(this.buttonFS10K);
             this.groupBox3.Controls.Add(this.buttonFS1K);
-            this.groupBox3.Location = new System.Drawing.Point(184, 283);
+            this.groupBox3.Location = new System.Drawing.Point(184, 259);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(348, 61);
             this.groupBox3.TabIndex = 7;
@@ -765,48 +777,41 @@
             this.buttonFS1K.UseVisualStyleBackColor = true;
             this.buttonFS1K.Click += new System.EventHandler(this.buttonFS1K_Click);
             // 
-            // buttonAdd
-            // 
-            this.buttonAdd.Location = new System.Drawing.Point(795, 350);
-            this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(76, 23);
-            this.buttonAdd.TabIndex = 8;
-            this.buttonAdd.Text = "Add";
-            this.buttonAdd.UseVisualStyleBackColor = true;
-            // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(795, 379);
+            this.buttonSave.Location = new System.Drawing.Point(795, 355);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 9;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(795, 515);
+            this.buttonClear.Location = new System.Drawing.Point(795, 491);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 23);
             this.buttonClear.TabIndex = 10;
             this.buttonClear.Text = "Clear";
             this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
-            // chart1
+            // chartdata
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
-            this.chart1.Location = new System.Drawing.Point(184, 350);
-            this.chart1.Name = "chart1";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart1.Series.Add(series3);
-            this.chart1.Size = new System.Drawing.Size(255, 188);
-            this.chart1.TabIndex = 11;
-            this.chart1.Text = "chart1";
+            chartArea4.Name = "ChartArea1";
+            this.chartdata.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chartdata.Legends.Add(legend4);
+            this.chartdata.Location = new System.Drawing.Point(184, 355);
+            this.chartdata.Name = "chartdata";
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chartdata.Series.Add(series4);
+            this.chartdata.Size = new System.Drawing.Size(325, 188);
+            this.chartdata.TabIndex = 11;
+            this.chartdata.Text = "chart1";
             // 
             // labelVersion
             // 
@@ -814,33 +819,10 @@
             this.labelVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 5F);
             this.labelVersion.Location = new System.Drawing.Point(10, 534);
             this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(33, 7);
+            this.labelVersion.Size = new System.Drawing.Size(14, 7);
             this.labelVersion.TabIndex = 12;
-            this.labelVersion.Text = "Origin0.1";
+            this.labelVersion.Text = "1.0";
             this.labelVersion.Click += new System.EventHandler(this.labelVersion_Click);
-            // 
-            // cpRpToolStripMenuItem
-            // 
-            this.cpRpToolStripMenuItem.Name = "cpRpToolStripMenuItem";
-            this.cpRpToolStripMenuItem.Size = new System.Drawing.Size(12, 20);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cpGpRpToolStripMenuItem,
-            this.cpRpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(880, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // cpGpRpToolStripMenuItem
-            // 
-            this.cpGpRpToolStripMenuItem.Name = "cpGpRpToolStripMenuItem";
-            this.cpGpRpToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
-            this.cpGpRpToolStripMenuItem.Text = "Cp-Gp-Rp";
-            this.cpGpRpToolStripMenuItem.Click += new System.EventHandler(this.cpGpRpToolStripMenuItem_Click);
             // 
             // groupBox6
             // 
@@ -848,7 +830,7 @@
             this.groupBox6.Controls.Add(this.buttonUSRp);
             this.groupBox6.Controls.Add(this.buttonUSGp);
             this.groupBox6.Controls.Add(this.buttonUSCp);
-            this.groupBox6.Location = new System.Drawing.Point(538, 283);
+            this.groupBox6.Location = new System.Drawing.Point(538, 259);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(335, 61);
             this.groupBox6.TabIndex = 8;
@@ -895,38 +877,72 @@
             this.buttonUSCp.UseVisualStyleBackColor = true;
             this.buttonUSCp.Click += new System.EventHandler(this.buttonUSCp_Click);
             // 
-            // pictureState
+            // textRate
             // 
-            this.pictureState.Image = global::TesterAutomation_Dashboard.Properties.Resources.red;
-            this.pictureState.Location = new System.Drawing.Point(141, 86);
-            this.pictureState.Name = "pictureState";
-            this.pictureState.Size = new System.Drawing.Size(19, 17);
-            this.pictureState.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureState.TabIndex = 5;
-            this.pictureState.TabStop = false;
+            this.textRate.Location = new System.Drawing.Point(254, 326);
+            this.textRate.Name = "textRate";
+            this.textRate.Size = new System.Drawing.Size(100, 20);
+            this.textRate.TabIndex = 13;
+            this.textRate.Text = "200";
+            // 
+            // buttonStart
+            // 
+            this.buttonStart.Location = new System.Drawing.Point(360, 324);
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(75, 23);
+            this.buttonStart.TabIndex = 14;
+            this.buttonStart.Text = "Start";
+            this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // buttonStop
+            // 
+            this.buttonStop.Location = new System.Drawing.Point(444, 324);
+            this.buttonStop.Name = "buttonStop";
+            this.buttonStop.Size = new System.Drawing.Size(75, 23);
+            this.buttonStop.TabIndex = 15;
+            this.buttonStop.Text = "Stop";
+            this.buttonStop.UseVisualStyleBackColor = true;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(191, 329);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Rate(ms)";
+            // 
+            // timerplot
+            // 
+            this.timerplot.Tick += new System.EventHandler(this.timerplot_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(880, 550);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.buttonStop);
+            this.Controls.Add(this.buttonStart);
+            this.Controls.Add(this.textRate);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.labelVersion);
-            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.chartdata);
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvdata);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxStatus);
-            this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
             this.Text = "LRC Meter Dashborad";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBoxStatus.ResumeLayout(false);
             this.groupBoxStatus.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureState)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureConn)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -936,13 +952,10 @@
             this.groupBox4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvdata)).EndInit();
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartdata)).EndInit();
             this.groupBox6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureState)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -958,9 +971,8 @@
         private System.Windows.Forms.Button buttonConn;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvdata;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Label labelInt_Value;
@@ -1002,7 +1014,7 @@
         private System.Windows.Forms.RadioButton rbInterLong;
         private System.Windows.Forms.RadioButton rbInterMedium;
         private System.Windows.Forms.RadioButton rbInterShort;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartdata;
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Button buttonSubmit;
         private System.Windows.Forms.Label label4;
@@ -1011,9 +1023,6 @@
         private System.Windows.Forms.Label labelMea2_Unit;
         private System.Windows.Forms.Label labelMea2_Value;
         private System.Windows.Forms.Label labelMea2;
-        private System.Windows.Forms.ToolStripMenuItem cpRpToolStripMenuItem;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem cpGpRpToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button buttonUSDefault;
         private System.Windows.Forms.Button buttonUSRp;
@@ -1023,6 +1032,11 @@
         private System.Windows.Forms.Button buttonPause;
         private System.Windows.Forms.Button buttonResume;
         private System.Windows.Forms.PictureBox pictureState;
+        private System.Windows.Forms.TextBox textRate;
+        private System.Windows.Forms.Button buttonStart;
+        private System.Windows.Forms.Button buttonStop;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timerplot;
     }
 }
 
