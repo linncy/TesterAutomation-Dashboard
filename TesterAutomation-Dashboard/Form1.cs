@@ -261,7 +261,7 @@ namespace TesterAutomation_Dashboard
 
         private void labelVersion_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("LRC Meter Dashboard \nDeveloped for Agilent 4284A Precision LCR Meter\nVersion 1.0\nBuilt on 05/18/2018", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("LRC Meter Dashboard \nDeveloped for Agilent 4284A Precision LCR Meter\nVersion 1.1\nBuilt on 05/21/2018", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void initializemeasure()
         {
@@ -381,10 +381,12 @@ namespace TesterAutomation_Dashboard
                 MeaLabelModify(2, Gp);
                 if(ratemode)
                 {
-                    newrow = dtdata.NewRow();
-                    newrow[0] = rate * n / 1000.0;
-                    newrow[1] = Cp;
-                    dtdata.Rows.InsertAt(newrow, 0);
+                    this.Invoke(new Action(delegate {
+                        newrow = dtdata.NewRow();
+                        newrow[0] = rate * n / 1000.0;
+                        newrow[1] = Cp;
+                        dtdata.Rows.InsertAt(newrow, 0);
+                    }));
                     listdatax.Add(rate * n / 1000.0);
                     listdatay.Add(Cp);
                     n++;
@@ -522,8 +524,14 @@ namespace TesterAutomation_Dashboard
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
+            if(ratemode)
+            {
+                ratemode = false;
+                timerplot.Enabled = false;
+            }
             dtdata = new DataTable();
             dgvdata.DataSource = dtdata;
+            n = 0;
         }
     }
 }
