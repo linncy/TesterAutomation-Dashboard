@@ -224,11 +224,7 @@ namespace TesterAutomation_Dashboard
 
                 pictureConn.Image = global::TesterAutomation_Dashboard.Properties.Resources.green;
                 labelConn_Value.Text = "Success";
-                pictureState.Image = global::TesterAutomation_Dashboard.Properties.Resources.green;
-                labelState_Value.Text = "Running";
                 GPIBstatus = true;
-                state = DashboardState.running;
-                initializemeasure();
             }
             else
             {
@@ -295,19 +291,22 @@ namespace TesterAutomation_Dashboard
         }
         private void buttonSubmit_Click(object sender, EventArgs e)
         {
+            if(state == DashboardState.running)
+            {
+                MonitorThread.Abort();
+            }
             string Comm;
             if(!GPIBstatus)
             {
                 MessageBox.Show("Please Connect Instrument.", "No GPIB Connection", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            Comm = "Freq" + " " + txtFrequency.Text + "Hz";
-            formattedIO.WriteLine(Comm);
-            labelFreq_Value.Text = txtFrequency.Text + "Hz";
-            sendCommand("BIAS:STAT 1");
+
             Comm = "BIAS:VOLT " + txtMeasVoltage.Text + "V";
             formattedIO.WriteLine(Comm);
+            labelBias_Value.Text = txtMeasVoltage.Text+"V";
             Comm = "Volt" + " " + txtOscVoltage.Text + "mV";
+            labelLevel_Value.Text = txtOscVoltage.Text + "mV";
             formattedIO.WriteLine(Comm);
             if (rbParallel.Checked == true)
             {
@@ -318,6 +317,18 @@ namespace TesterAutomation_Dashboard
                 sendCommand("Func:IMP CSRS");
             }
             sendCommand("APER");
+            Comm = "Freq" + " " + txtFrequency.Text + "Hz";
+            formattedIO.WriteLine(Comm);
+            labelFreq_Value.Text = txtFrequency.Text + "Hz";
+            sendCommand("BIAS:STAT 1");
+            pictureState.Image = global::TesterAutomation_Dashboard.Properties.Resources.green;
+            labelState_Value.Text = "Running";
+            buttonPause.Enabled = true;
+            state = DashboardState.running;
+            MonitorThreadStart = new System.Threading.ThreadStart(CGRmonitor);
+            MonitorThread = new System.Threading.Thread(MonitorThreadStart);
+            MonitorThread.IsBackground = true;
+            MonitorThread.Start();
         }
 
         public int MeaLabelModify(int MeaLabelNumber,double value)
