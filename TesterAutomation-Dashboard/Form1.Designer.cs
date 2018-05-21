@@ -938,7 +938,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxStatus);
             this.Name = "Form1";
-            this.Text = "LRC Meter Dashborad";
+            this.Text = "LCR Meter Dashborad";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBoxStatus.ResumeLayout(false);
             this.groupBoxStatus.PerformLayout();
